@@ -167,7 +167,7 @@ class User extends ResController
     {
         $rules = [
             'email' => 'required|email',
-            'password' => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
+            'password' => 'required',
         ];
         $valaditor = Validator::make($r->all(), $rules);
         if ($valaditor->fails()) {
