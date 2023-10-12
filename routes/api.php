@@ -49,8 +49,6 @@ Route::middleware('auth:sanctum','ability:U')->group(function(){
     Route::get('/list_bill',[BillingController::class,'list_bill']);
 
 
-
-
     Route::post('/add_sellers',[SellersLabel::class,'createSellers']);
     //===================logout=========================
     Route::post('/logout',[User::class,'logout']);
