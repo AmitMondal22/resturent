@@ -35,12 +35,12 @@ Route::post('/login',[User::class,'login']);
 Route::middleware('auth:sanctum','ability:U')->group(function(){
     Route::post('/add_unit',[MasterController::class,'add_unit']);
     Route::get('/list_unit',[MasterController::class,'list_unit']);
-    Route::get('/edit_unit',[MasterController::class,'edit_unit']);
+    Route::post('/edit_unit',[MasterController::class,'edit_unit']);
 
 
     Route::post('/add_catagory',[MasterController::class,'add_catagory']);
     Route::get('/list_catagory',[MasterController::class,'list_catagory']);
-    Route::get('/edit_catagory',[MasterController::class,'edit_catagory']);
+    Route::post('/edit_catagory',[MasterController::class,'edit_catagory']);
 
 
     Route::post('/add_food',[MasterController::class,'add_food']);
