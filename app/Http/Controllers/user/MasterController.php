@@ -47,6 +47,28 @@ class MasterController extends ResController
     }
 
 
+    public function edit_unit(Request $r)
+    {
+        try {
+            $rules = [
+                "unit_name" => 'string|required',
+                "unit_id" => 'required'
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError($valaditor->errors(), 400);
+            }
+
+            $result = Md_unit_mastar::where("unit_id",$r->unit_id)->where("resturent_id", auth()->user()->resturent_dtls)->update([
+                "unit_name" => $r->unit_name,
+                "create_by" => auth()->user()->id
+            ]);
+            return $this->sendResponse($result, "unit update successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError($th, 400);
+        }
+    }
+
 
     public function add_food(Request $r)
     {
@@ -68,6 +90,34 @@ class MasterController extends ResController
                 "unit_id"=>$r->unit_id,
                 "catagory_id"=>$r->catagory_id,
                 "resturent_id"=>auth()->user()->resturent_dtls,
+                "created_by"=>auth()->user()->id
+            ]);
+            return $this->sendResponse($result, "add food mastar");
+        } catch (\Throwable $th) {
+            return $this->sendError($th, 400);
+        }
+    }
+
+
+    public function edit_food(Request $r)
+    {
+        try {
+            $rules = [
+                "food_name" => 'string|required',
+                "food_price" => 'numeric|required',
+                "unit_id" => 'numeric|required',
+                "food_id" => 'numeric|required',
+                "catagory_id" => 'numeric|required'
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError($valaditor->errors(), 400);
+            }
+            $result = Md_food::where("food_id",$r->food_id)->where("resturent_id",auth()->user()->resturent_dtls)->update([
+                "food_name"=>$r->food_name,
+                "food_price"=>$r->food_price,
+                "unit_id"=>$r->unit_id,
+                "catagory_id"=>$r->catagory_id,
                 "created_by"=>auth()->user()->id
             ]);
             return $this->sendResponse($result, "add food mastar");
@@ -144,6 +194,31 @@ class MasterController extends ResController
         try {
             $result = Md_catagory::where("resturent_id",auth()->user()->resturent_dtls)->get();
             return $this->sendResponse($result, "unit list");
+        } catch (\Throwable $th) {
+            return $this->sendError($th, 400);
+        }
+    }
+
+
+
+    public function edit_catagory(Request $r)
+    {
+        try {
+            $rules = [
+                "catagory_name" => 'string|required',
+                "catagory_id" => 'required'
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError($valaditor->errors(), 400);
+            }
+
+            $result = Md_catagory::where("catagory_id",$r->catagory_id)->update([
+                "resturent_id" => auth()->user()->resturent_dtls,
+                "catagory_name" => $r->catagory_name,
+                "create_by" => auth()->user()->id
+            ]);
+            return $this->sendResponse($result, "unit add successfully");
         } catch (\Throwable $th) {
             return $this->sendError($th, 400);
         }
