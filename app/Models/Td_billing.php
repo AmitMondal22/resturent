@@ -12,7 +12,7 @@ class Td_billing extends Model
     protected $table = 'td_billing';
     protected $primaryKey = 'id';
     protected $fillable = [
-        "billing_id","customer_id","food_id","catagory_id", "price", "tital_price", "qty", "resturent_id", "create_by"
+        "billing_id","customer_id","food_id","catagory_id", "price", "total_price", "qty", "resturent_id", "create_by"
     ];
 
 }

@@ -57,6 +57,7 @@ Route::middleware('auth:sanctum','ability:U')->group(function(){
 
 
     Route::post('/billing_report',[Report::class,'billing_report']);
+    Route::post('/billing_info_report',[Report::class,'billing_info_report']);
     //===================logout=========================
     Route::post('/logout',[User::class,'logout']);
 });

@@ -31,7 +31,7 @@ class BillingController extends ResController
                     "food_id" => $stordata['food_id'],
                     "catagory_id" => $stordata['catagory_id'],
                     "price" => $stordata['price'],
-                    "tital_price" => $stordata['total_price'],
+                    "total_price" => $stordata['total_price'],
                     "qty" => $stordata['qty'],
                     "resturent_id" => auth()->user()->resturent_dtls,
                     "create_by" => auth()->user()->id
