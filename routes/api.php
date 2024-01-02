@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\user\BillingController;
 use App\Http\Controllers\user\MasterController;
+use App\Http\Controllers\user\Report;
 use App\Http\Controllers\user\SellersLabel;
 use App\Http\Controllers\user\User;
 use Illuminate\Http\Request;
@@ -53,6 +54,9 @@ Route::middleware('auth:sanctum','ability:U')->group(function(){
 
 
     Route::post('/add_sellers',[SellersLabel::class,'createSellers']);
+
+
+    Route::post('/billing_report',[Report::class,'billing_report']);
     //===================logout=========================
     Route::post('/logout',[User::class,'logout']);
 });
