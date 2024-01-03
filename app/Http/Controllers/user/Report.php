@@ -30,7 +30,7 @@ class Report extends ResController
                 ->where('td_billing.resturent_id', auth()->user()->resturent_dtls)
                 ->whereBetween('td_billing.created_at', [$r->from_date, $r->to_date])
                 ->groupBy('td_billing.billing_id','td_billing.total_price')
-                ->toSql();
+                ->get();
             return $this->sendResponse($result, "billing report");
         } catch (\Throwable $th) {
             return $this->sendError($th, 400);
