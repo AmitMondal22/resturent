@@ -38,6 +38,7 @@ class Report extends ResController
     }
 
 
+
     function billing_info_report(Request $r)
     {
         try {
