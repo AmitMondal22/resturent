@@ -43,9 +43,7 @@ class Report extends ResController
     {
         try {
             $rules = [
-                "billing_id" => 'required',
-                "from_date" => 'required',
-                "to_date" => 'required'
+                "billing_id" => 'required'
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
@@ -57,7 +55,6 @@ class Report extends ResController
                 ->join('users', 'users.id', '=', 'td_billing.customer_id')
                 ->select('td_billing.*', 'md_catagory.catagory_name', 'md_food.food_name', 'md_unit_mastar.unit_name', 'users.name as customer_name')
                 ->where('td_billing.resturent_id', auth()->user()->resturent_dtls)
-                ->whereBetween('td_billing.created_at', [$r->from_date, $r->to_date])
                 ->where('td_billing.billing_id', $r->billing_id)
                 ->get();
             return $this->sendResponse($result, "billing report");
