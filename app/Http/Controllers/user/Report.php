@@ -13,7 +13,7 @@ class Report extends ResController
 {
     function billing_report(Request $r)
     {
-        try {
+      //  try {
             $rules = [
                 "from_date" => 'required',
                 "to_date" => 'required'
@@ -32,9 +32,9 @@ class Report extends ResController
                 ->groupBy('td_billing.billing_id','td_billing.total_price')
                 ->get();
             return $this->sendResponse($result, "billing report");
-        } catch (\Throwable $th) {
+        /*} catch (\Throwable $th) {
             return $this->sendError($th, 400);
-        }
+        }*/
     }
 
 
