@@ -13,7 +13,7 @@ class Report extends ResController
 {
     function billing_report(Request $r)
     {
-      //  try {
+        try {
             $rules = [
                 "from_date" => 'required',
                 "to_date" => 'required'
@@ -32,9 +32,9 @@ class Report extends ResController
                 ->groupBy('td_billing.billing_id','td_billing.total_price',"td_billing.id","td_billing.customer_id","td_billing.food_id","td_billing.catagory_id","td_billing.price","td_billing.qty","td_billing.resturent_id","td_billing.create_by","td_billing.created_at","td_billing.updated_at","md_catagory.catagory_name", "md_food.food_name", "md_unit_mastar.unit_name", "users.name")
                 ->get();
             return $this->sendResponse($result, "billing report");
-        /*} catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             return $this->sendError($th, 400);
-        }*/
+        }
     }
 
 
