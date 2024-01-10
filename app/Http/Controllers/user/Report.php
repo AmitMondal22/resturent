@@ -29,7 +29,7 @@ class Report extends ResController
                 ->select('td_billing.*','md_catagory.catagory_name', 'md_food.food_name', 'md_unit_mastar.unit_name', 'users.name as customer_name', DB::raw('SUM(td_billing.total_price) as total_price_sum'))
                 ->where('td_billing.resturent_id', auth()->user()->resturent_dtls)
                 ->whereBetween('td_billing.created_at', [$r->from_date, $r->to_date])
-                ->groupBy('td_billing.billing_id','td_billing.total_price')
+                ->groupBy('td_billing.billing_id','td_billing.total_price',"td_billing.id")
                 ->get();
             return $this->sendResponse($result, "billing report");
         /*} catch (\Throwable $th) {
