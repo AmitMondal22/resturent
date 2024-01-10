@@ -41,7 +41,7 @@ class Report extends ResController
 
     function billing_info_report(Request $r)
     {
-        try {
+        //try {
             $rules = [
                 "billing_id" => 'required'
             ];
@@ -58,8 +58,8 @@ class Report extends ResController
                 ->where('td_billing.billing_id', $r->billing_id)
                 ->get();
             return $this->sendResponse($result, "billing report");
-        } catch (\Throwable $th) {
+       /* } catch (\Throwable $th) {
             return $this->sendError($th, 400);
-        }
+        }*/
     }
 }
