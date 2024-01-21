@@ -26,10 +26,10 @@ class Report extends ResController
                 ->join('md_catagory', 'md_catagory.catagory_id', '=', 'md_food.catagory_id')
                 ->join('md_unit_mastar', 'md_unit_mastar.unit_id', '=', 'md_food.unit_id')
                 ->join('users', 'users.id', '=', 'td_billing.customer_id')
-                ->select('td_billing.*', 'md_catagory.catagory_name', 'md_food.food_name', 'md_unit_mastar.unit_name', 'users.name as customer_name', DB::raw('SUM(td_billing.total_price) as total_price_sum'))
+                ->select('td_billing.billing_id',"td_billing.price", "td_billing.qty", "td_billing.created_at", DB::raw('SUM(td_billing.total_price) as total_price_sum'))
                 ->where('td_billing.resturent_id', auth()->user()->resturent_dtls)
                 ->whereBetween('td_billing.created_at', [$r->from_date, $r->to_date])
-                ->groupBy('td_billing.billing_id', 'td_billing.total_price', "td_billing.id", "td_billing.customer_id", "td_billing.food_id", "td_billing.catagory_id", "td_billing.price", "td_billing.qty", "td_billing.resturent_id", "td_billing.create_by", "td_billing.created_at", "td_billing.updated_at", "md_catagory.catagory_name", "md_food.food_name", "md_unit_mastar.unit_name", "users.name")
+                ->groupBy('td_billing.billing_id', 'td_billing.total_price', "td_billing.price", "td_billing.qty", "td_billing.created_at")
                 ->get();
             return $this->sendResponse($result, "billing report");
         } catch (\Throwable $th) {
